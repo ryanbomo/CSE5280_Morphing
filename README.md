@@ -20,7 +20,8 @@ Before compute the whole morph sequence, compute the midway face of the images A
 
 The main task in warping the faces into the average shape is implementing an affine warp for each triangle in the triangulation from the original images into this new shape.  this will involve computing an affine transofmration matrix A between two triangles:
 
-```A = computeAffine(tri_pts_1, tri_pts_2); %You will write this function
+```
+A = computeAffine(tri_pts_1, tri_pts_2); %You will write this function
 ```
 
 
