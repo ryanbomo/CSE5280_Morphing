@@ -1,11 +1,12 @@
 function morphed_im = morph(im1, im2, im1_X, im1_Y, im2_X, im2_Y, tri, warp_frac, dissolve_frac)
 
 finalImage1 = uint8(zeros(480,640,3));
+dims = size(finalImage1);
 % Draw Average Face
 raw_X_av = (im2_X*(warp_frac) + im1_X*(1-warp_frac));
 raw_Y_av = (im2_Y*(warp_frac)+ im1_Y*(1-warp_frac));
-X_av = raw_X_av * 640;
-Y_av = raw_Y_av *480;
+X_av = raw_X_av * dims(2);
+Y_av = raw_Y_av *dims(1);
 
 
 
@@ -13,10 +14,10 @@ for iTriangle = 1 : length(tri)
     
     % Estimate the transformation between two shapes. 
     tri( iTriangle, 1:3)
-    img1_X_Vals = [im1_X(tri(iTriangle,1))*640, im1_X(tri(iTriangle,2))*640, im1_X(tri(iTriangle,3))*640];
-    img1_Y_Vals = [im1_Y(tri(iTriangle,1))*480, im1_Y(tri(iTriangle,2))*480, im1_Y(tri(iTriangle,3))*480];
-    img2_X_Vals = [im2_X(tri(iTriangle,1))*640, im2_X(tri(iTriangle,2))*640, im2_X(tri(iTriangle,3))*640];
-    img2_Y_Vals = [im2_Y(tri(iTriangle,1))*480, im2_Y(tri(iTriangle,2))*480, im2_Y(tri(iTriangle,3))*480];
+    img1_X_Vals = [im1_X(tri(iTriangle,1))*dims(2), im1_X(tri(iTriangle,2))*dims(2), im1_X(tri(iTriangle,3))*dims(2)];
+    img1_Y_Vals = [im1_Y(tri(iTriangle,1))*dims(1), im1_Y(tri(iTriangle,2))*dims(1), im1_Y(tri(iTriangle,3))*dims(1)];
+    img2_X_Vals = [im2_X(tri(iTriangle,1))*dims(2), im2_X(tri(iTriangle,2))*dims(2), im2_X(tri(iTriangle,3))*dims(2)];
+    img2_Y_Vals = [im2_Y(tri(iTriangle,1))*dims(1), im2_Y(tri(iTriangle,2))*dims(1), im2_Y(tri(iTriangle,3))*dims(1)];
     target_X_Vals = [X_av(tri(iTriangle,1)), X_av(tri(iTriangle,2)), X_av(tri(iTriangle,3))];
     target_Y_Vals = [Y_av(tri(iTriangle,1)), Y_av(tri(iTriangle,2)), Y_av(tri(iTriangle,3))];
     
@@ -81,15 +82,15 @@ end
 morphed_im = finalImage1;
 
 
-figure; 
-set(gcf, 'color','w'); 
-set(gcf, 'Position', [0, 0, 200, 200])
-imshow(morphed_im); 
-title('Face and Mask'); 
-drawnow;
-hold on;
-triplot(tri,X_av,Y_av);
-hold off;
+% figure; 
+% set(gcf, 'color','w'); 
+% set(gcf, 'Position', [0, 0, 200, 200])
+% imshow(morphed_im); 
+% title('Face and Mask'); 
+% drawnow;
+% hold on;
+% triplot(tri,X_av,Y_av);
+% hold off;
 
 
 return

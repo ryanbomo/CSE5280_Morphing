@@ -1,7 +1,9 @@
 function a = calcAverage()
 
+imgX = 640;
+imgY = 480;
 numFaces = 7;
-finalImage = uint8(zeros(480,640,3));
+finalImage = uint8(zeros(imgY,imgX,3));
 im1 = imread('avg_face_img/08-2f.jpg');
 im2 = imread('avg_face_img/12-2f.jpg');
 im3 = imread('avg_face_img/14-2f.jpg');
@@ -36,22 +38,22 @@ tri = delaunay(X_av,Y_av);
 for iTriangle = 1 : length(tri)
     
     % Estimate the transformation between each face and average face.
-    img1_X_Vals = [face1_X(tri(iTriangle,1))*640, face1_X(tri(iTriangle,2))*640, face1_X(tri(iTriangle,3))*640];
-    img1_Y_Vals = [face1_Y(tri(iTriangle,1))*480, face1_Y(tri(iTriangle,2))*480, face1_Y(tri(iTriangle,3))*480];
-    img2_X_Vals = [face2_X(tri(iTriangle,1))*640, face2_X(tri(iTriangle,2))*640, face2_X(tri(iTriangle,3))*640];
-    img2_Y_Vals = [face2_Y(tri(iTriangle,1))*480, face2_Y(tri(iTriangle,2))*480, face2_Y(tri(iTriangle,3))*480];
-    img3_X_Vals = [face3_X(tri(iTriangle,1))*640, face3_X(tri(iTriangle,2))*640, face3_X(tri(iTriangle,3))*640];
-    img3_Y_Vals = [face3_Y(tri(iTriangle,1))*480, face3_Y(tri(iTriangle,2))*480, face3_Y(tri(iTriangle,3))*480];
-    img4_X_Vals = [face4_X(tri(iTriangle,1))*640, face4_X(tri(iTriangle,2))*640, face4_X(tri(iTriangle,3))*640];
-    img4_Y_Vals = [face4_Y(tri(iTriangle,1))*480, face4_Y(tri(iTriangle,2))*480, face4_Y(tri(iTriangle,3))*480];
-    img5_X_Vals = [face5_X(tri(iTriangle,1))*640, face5_X(tri(iTriangle,2))*640, face5_X(tri(iTriangle,3))*640];
-    img5_Y_Vals = [face5_Y(tri(iTriangle,1))*480, face5_Y(tri(iTriangle,2))*480, face5_Y(tri(iTriangle,3))*480];
-    img6_X_Vals = [face6_X(tri(iTriangle,1))*640, face6_X(tri(iTriangle,2))*640, face6_X(tri(iTriangle,3))*640];
-    img6_Y_Vals = [face6_Y(tri(iTriangle,1))*480, face6_Y(tri(iTriangle,2))*480, face6_Y(tri(iTriangle,3))*480];
-    img7_X_Vals = [face7_X(tri(iTriangle,1))*640, face7_X(tri(iTriangle,2))*640, face7_X(tri(iTriangle,3))*640];
-    img7_Y_Vals = [face7_Y(tri(iTriangle,1))*480, face7_Y(tri(iTriangle,2))*480, face7_Y(tri(iTriangle,3))*480];
-    target_X_Vals = [X_av(tri(iTriangle,1))*640, X_av(tri(iTriangle,2))*640, X_av(tri(iTriangle,3))*640]
-    target_Y_Vals = [Y_av(tri(iTriangle,1))*480, Y_av(tri(iTriangle,2))*480, Y_av(tri(iTriangle,3))*480]
+    img1_X_Vals = [face1_X(tri(iTriangle,1))*imgX, face1_X(tri(iTriangle,2))*imgX, face1_X(tri(iTriangle,3))*imgX];
+    img1_Y_Vals = [face1_Y(tri(iTriangle,1))*imgY, face1_Y(tri(iTriangle,2))*imgY, face1_Y(tri(iTriangle,3))*imgY];
+    img2_X_Vals = [face2_X(tri(iTriangle,1))*imgX, face2_X(tri(iTriangle,2))*imgX, face2_X(tri(iTriangle,3))*imgX];
+    img2_Y_Vals = [face2_Y(tri(iTriangle,1))*imgY, face2_Y(tri(iTriangle,2))*imgY, face2_Y(tri(iTriangle,3))*imgY];
+    img3_X_Vals = [face3_X(tri(iTriangle,1))*imgX, face3_X(tri(iTriangle,2))*imgX, face3_X(tri(iTriangle,3))*imgX];
+    img3_Y_Vals = [face3_Y(tri(iTriangle,1))*imgY, face3_Y(tri(iTriangle,2))*imgY, face3_Y(tri(iTriangle,3))*imgY];
+    img4_X_Vals = [face4_X(tri(iTriangle,1))*imgX, face4_X(tri(iTriangle,2))*imgX, face4_X(tri(iTriangle,3))*imgX];
+    img4_Y_Vals = [face4_Y(tri(iTriangle,1))*imgY, face4_Y(tri(iTriangle,2))*imgY, face4_Y(tri(iTriangle,3))*imgY];
+    img5_X_Vals = [face5_X(tri(iTriangle,1))*imgX, face5_X(tri(iTriangle,2))*imgX, face5_X(tri(iTriangle,3))*imgX];
+    img5_Y_Vals = [face5_Y(tri(iTriangle,1))*imgY, face5_Y(tri(iTriangle,2))*imgY, face5_Y(tri(iTriangle,3))*imgY];
+    img6_X_Vals = [face6_X(tri(iTriangle,1))*imgX, face6_X(tri(iTriangle,2))*imgX, face6_X(tri(iTriangle,3))*imgX];
+    img6_Y_Vals = [face6_Y(tri(iTriangle,1))*imgY, face6_Y(tri(iTriangle,2))*imgY, face6_Y(tri(iTriangle,3))*imgY];
+    img7_X_Vals = [face7_X(tri(iTriangle,1))*imgX, face7_X(tri(iTriangle,2))*imgX, face7_X(tri(iTriangle,3))*imgX];
+    img7_Y_Vals = [face7_Y(tri(iTriangle,1))*imgY, face7_Y(tri(iTriangle,2))*imgY, face7_Y(tri(iTriangle,3))*imgY];
+    target_X_Vals = [X_av(tri(iTriangle,1))*imgX, X_av(tri(iTriangle,2))*imgX, X_av(tri(iTriangle,3))*imgX]
+    target_Y_Vals = [Y_av(tri(iTriangle,1))*imgY, Y_av(tri(iTriangle,2))*imgY, Y_av(tri(iTriangle,3))*imgY]
     
     
     A = estimateAffineBetweenShapes(img1_X_Vals, img1_Y_Vals, target_X_Vals, target_Y_Vals);
