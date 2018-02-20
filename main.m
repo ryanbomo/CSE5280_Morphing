@@ -23,36 +23,56 @@ tri_av = delaunay(X_av,Y_av);
 
 % Get Photos
 img_1 = imread('img/23-5m.jpg'); 
-figure; 
-set(gcf, 'color','w'); 
-set(gcf, 'Position', [0, 0, 100, 100])
-imshow(img_1); 
-title('Source image and triangulation'); 
-drawnow;
-hold on;
-% Obtain triangulation 
-triplot(tri_av,X_1,Y_1);
-hold off;
+% figure; 
+% set(gcf, 'color','w'); 
+% set(gcf, 'Position', [0, 0, 100, 100])
+% imshow(img_1); 
+% title('Source image and triangulation'); 
+% drawnow;
+% hold on;
+% % Obtain triangulation 
+% triplot(tri_av,X_1,Y_1);
+% hold off;
 
 
 
-% IMG 2 Test
-img_2 = imread('img/13-5m.jpg'); 
-figure; 
-set(gcf, 'color','w'); 
-set(gcf, 'Position', [0, 0, 100, 100])
-imshow(img_2); 
-title('Source image and triangulation'); 
-drawnow;
-hold on;
-triplot(tri_av,X_2,Y_2);
-hold off;
 
+
+img_2 = imread('img/13-5m.jpg');
 transpose = 0
+current_time = 1
 while transpose<=1
-    morph(img_1, img_2, raw_X_1, raw_Y_1, raw_X_2, raw_Y_2, tri_av, transpose, transpose);
-    transpose = transpose + (1/5)
+    morphed_im = morph(img_1, img_2, raw_X_1, raw_Y_1, raw_X_2, raw_Y_2, tri_av, transpose, transpose);
+    transpose = transpose + (1/44)
+    
+    
+    % Write things to gif
+    im{current_time} = morphed_im;
+    filename = 'testAnimated.gif';
+    [A,map] = rgb2ind(im{current_time},256);
+    delay_time = 1/30;
+    if current_time == 1
+        imwrite(A,map,filename,'gif','LoopCount',Inf,'DelayTime',delay_time);
+    else
+        imwrite(A,map,filename,'gif','WriteMode','append','DelayTime',delay_time);
+    end
+    
+    current_time = current_time + 1;
+    
+    
+    
 end
+
+% IMG 2 Test 
+% figure; 
+% set(gcf, 'color','w'); 
+% set(gcf, 'Position', [0, 0, 100, 100])
+% imshow(img_2); 
+% title('Source image and triangulation'); 
+% drawnow;
+% hold on;
+% triplot(tri_av,X_2,Y_2);
+% hold off;
 
 return
 
