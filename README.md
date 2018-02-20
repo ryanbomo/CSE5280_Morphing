@@ -9,24 +9,14 @@ In the second task, synthesize the average face appearance of a subset of a popu
 
 ## Defining Correspondences
 
-Compute a Delaunay triangulation on a midway face.
+Compute a Delaunay triangulation on a midway face. The Delaunay triangulation just uses indecies to grab coordinates, so once an average triangulation is found, corresponding triangles are quickly found in each face (assuming indices are in the same order for each face).
+
+Points were added to better outline the head and shoulders.
 
 ## Computing the midway face
-
-Before compute the whole morph sequence, compute the midway face of the images A and B.  This computation hsa three steps:
- - Compute the average shape
- - Warp both faces into that shape
- - Average the colors
-
-The main task in warping the faces into the average shape is implementing an affine warp for each triangle in the triangulation from the original images into this new shape.  this will involve computing an affine transofmration matrix A between two triangles:
-
-```
-A = computeAffine(tri_pts_1, tri_pts_2); %You will write this function
-```
-
-
-
-
-## The Morph Sequence
+At each iteration a midway face is computed using a weighted average of the two faces. The Delaunay triangulation is found, along with a weighted average for coordinates. Then each face's corresponding triangle is mapped to the weighted average triangle. The pixels for each face are also weighted, so that the transition effect occurs. 
 
 ## The "mean face" of a population
+Basically, this is one frame of the above, but with 7 faces. The smiling face of the women in the photos were used. Then a weighted average with each face being equal was done to find the midway triangulation. Then each was mapped to the triangulation using equal weights for each face's pixels. 
+
+Points were not added to the "mean face", so the head and shoulders seem warped. For a better result, add about 19 points to each to outline the head and shoulders.
