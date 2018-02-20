@@ -1,7 +1,7 @@
 function a = calcAverage()
 
 numFaces = 7;
-finalImage = uint8(zeros(480,600,3));
+finalImage = uint8(zeros(480,640,3));
 im1 = imread('avg_face_img/08-2f.jpg');
 im2 = imread('avg_face_img/12-2f.jpg');
 im3 = imread('avg_face_img/14-2f.jpg');
